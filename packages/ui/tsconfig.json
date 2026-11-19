@@ -1,0 +1,4 @@
+{
+  "extends": "@jo-ui/tsconfig/base.json",
+  "include": ["src"]
+}

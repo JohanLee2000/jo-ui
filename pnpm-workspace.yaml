@@ -1,0 +1,7 @@
+# Every folder matching these globs that contains a package.json
+# becomes a workspace package that other packages can depend on
+# with the "workspace:*" version.
+packages:
+  - "packages/*" # publishable libraries (@jo-ui/ui, @jo-ui/tokens, ...)
+  - "apps/*" # docs + playgrounds (never published)
+  - "tooling/*" # shared configs (tsconfig, eslint, ...)
