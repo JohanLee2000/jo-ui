@@ -3,12 +3,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "test": "vitest run",
+    "build-tokens": "pnpm --filter @jo-ui/tokens build",
+    "storybook": "pnpm build-tokens && storybook dev -p 6006",
+    "build-storybook": "pnpm build-tokens && storybook build",
+    "test": "pnpm build-tokens && vitest run",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@jo-ui/tokens": "workspace:*",
     "@jo-ui/ui": "workspace:*",
     "react": "^19.3.1",
     "react-dom": "^19.3.1"
