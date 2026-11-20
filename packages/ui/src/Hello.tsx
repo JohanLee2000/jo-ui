@@ -1,7 +1,8 @@
 import type { ComponentPropsWithoutRef } from "react";
 
+import { cx } from "@jo-ui/ui-core";
+
 import * as styles from "./Hello.css";
-import { cx } from "./utils/cx";
 
 export interface HelloProps extends ComponentPropsWithoutRef<"p"> {
   name?: string;

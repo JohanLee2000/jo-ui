@@ -31,7 +31,8 @@ export const button = recipe({
         outline: `2px solid ${vars.color.border.focus}`,
         outlineOffset: "2px",
       },
-      "&:disabled": {
+      // aria-disabled covers asChild links, which can't use the disabled attribute.
+      "&:disabled, &[aria-disabled='true']": {
         cursor: "not-allowed",
         opacity: 0.5, // disabled controls are exempt from WCAG contrast
       },
@@ -89,7 +90,7 @@ export const button = recipe({
     },
   },
 
-  // One entry per variant × tone combination.
+  // One entry per variant Ã— tone combination.
   // Hover is skipped when disabled, so a disabled button doesn't react.
   compoundVariants: [
     {
@@ -97,7 +98,7 @@ export const button = recipe({
       style: {
         background: vars.color.bg.accent,
         color: vars.color.text["on-accent"],
-        selectors: { "&:hover:not(:disabled)": { background: vars.color.bg["accent-hover"] } },
+        selectors: { "&:hover:not(:disabled, [aria-disabled='true'])": { background: vars.color.bg["accent-hover"] } },
       },
     },
     {
@@ -105,35 +106,35 @@ export const button = recipe({
       style: {
         background: vars.color.bg.danger,
         color: vars.color.text["on-danger"],
-        selectors: { "&:hover:not(:disabled)": { background: vars.color.bg["danger-hover"] } },
+        selectors: { "&:hover:not(:disabled, [aria-disabled='true'])": { background: vars.color.bg["danger-hover"] } },
       },
     },
     {
       variants: { variant: "outline", tone: "accent" },
       style: {
         color: vars.color.text.accent,
-        selectors: { "&:hover:not(:disabled)": { background: vars.color.bg["accent-subtle"] } },
+        selectors: { "&:hover:not(:disabled, [aria-disabled='true'])": { background: vars.color.bg["accent-subtle"] } },
       },
     },
     {
       variants: { variant: "outline", tone: "danger" },
       style: {
         color: vars.color.text.danger,
-        selectors: { "&:hover:not(:disabled)": { background: vars.color.bg["danger-subtle"] } },
+        selectors: { "&:hover:not(:disabled, [aria-disabled='true'])": { background: vars.color.bg["danger-subtle"] } },
       },
     },
     {
       variants: { variant: "ghost", tone: "accent" },
       style: {
         color: vars.color.text.accent,
-        selectors: { "&:hover:not(:disabled)": { background: vars.color.bg["accent-subtle"] } },
+        selectors: { "&:hover:not(:disabled, [aria-disabled='true'])": { background: vars.color.bg["accent-subtle"] } },
       },
     },
     {
       variants: { variant: "ghost", tone: "danger" },
       style: {
         color: vars.color.text.danger,
-        selectors: { "&:hover:not(:disabled)": { background: vars.color.bg["danger-subtle"] } },
+        selectors: { "&:hover:not(:disabled, [aria-disabled='true'])": { background: vars.color.bg["danger-subtle"] } },
       },
     },
   ],

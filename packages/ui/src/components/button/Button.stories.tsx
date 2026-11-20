@@ -135,6 +135,51 @@ export const InsideForm: Story = {
   },
 };
 
+/** asChild renders a link styled as a button: it's still a link to screen readers. */
+export const AsLink: Story = {
+  args: { asChild: true, variant: "outline" },
+  render: (args) => (
+    <Button {...args}>
+      {/* preventDefault keeps the test page from navigating. It also shows
+          Slot merging handlers: this one runs, then Button's onClick. */}
+      <a href="#docs" onClick={(event) => event.preventDefault()}>
+        Read the docs
+      </a>
+    </Button>
+  ),
+  play: async ({ canvas, userEvent, args }) => {
+    const link = canvas.getByRole("link", { name: "Read the docs" });
+
+    // A real <a> with Button's classes, and no button-only attributes.
+    await expect(link.tagName).toBe("A");
+    await expect(link.className).toMatch(/Button_button__/);
+    await expect(link).not.toHaveAttribute("type");
+    await expect(canvas.queryByRole("button")).not.toBeInTheDocument();
+
+    await userEvent.click(link);
+    await expect(args.onClick).toHaveBeenCalledTimes(1);
+  },
+};
+
+/** A disabled asChild link is marked aria-disabled and doesn't navigate or call onClick. */
+export const DisabledLink: Story = {
+  args: { asChild: true, disabled: true },
+  render: (args) => (
+    <Button {...args}>
+      <a href="#should-not-navigate">Unavailable</a>
+    </Button>
+  ),
+  play: async ({ canvas, userEvent, args }) => {
+    const link = canvas.getByRole("link", { name: "Unavailable" });
+    const urlBefore = window.location.href;
+
+    await expect(link).toHaveAttribute("aria-disabled", "true");
+    await userEvent.click(link);
+    await expect(args.onClick).not.toHaveBeenCalled();
+    await expect(window.location.href).toBe(urlBefore);
+  },
+};
+
 /** A className passed in is added to the button's own classes, not swapped for them. */
 export const CustomClassName: Story = {
   args: { className: "my-app-class" },
