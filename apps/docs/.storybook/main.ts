@@ -30,7 +30,10 @@ const config: StorybookConfig = {
       // avoids that. "a > b" means "b, as a dependency of a": the helper
       // belongs to @jo-ui/ui, not to this docs app.
       optimizeDeps: {
-        include: ["@jo-ui/ui > @vanilla-extract/recipes/createRuntimeFn"],
+        include: [
+          "@jo-ui/ui > @vanilla-extract/recipes/createRuntimeFn",
+          "@jo-ui/ui > @vanilla-extract/sprinkles/createRuntimeSprinkles",
+        ],
       },
     });
   },
