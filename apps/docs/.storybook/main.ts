@@ -1,4 +1,5 @@
 import type { StorybookConfig } from "@storybook/react-vite";
+import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 
 const config: StorybookConfig = {
   // Stories live next to their components in the library packages.
@@ -14,6 +15,17 @@ const config: StorybookConfig = {
     "@storybook/addon-vitest", // run stories as tests (Vitest browser mode)
   ],
   framework: "@storybook/react-vite",
+
+  // Storybook builds with Vite. This hook receives Storybook's Vite config and
+  // returns it with our additions; mergeConfig combines the two instead of
+  // replacing Storybook's own plugins.
+  viteFinal: async (config) => {
+    const { mergeConfig } = await import("vite");
+    return mergeConfig(config, {
+      // Compiles *.css.ts files (vanilla-extract) into static CSS + class names.
+      plugins: [vanillaExtractPlugin()],
+    });
+  },
 };
 
 export default config;

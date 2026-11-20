@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { expect } from "storybook/test";
 
 import { Hello } from "./Hello";
 
@@ -20,5 +21,21 @@ export const Default: Story = {};
 export const CustomName: Story = {
   args: {
     name: "Jo",
+  },
+};
+
+/** A className passed in is added to Hello's own class, not swapped for it. */
+export const WithClassName: Story = {
+  args: {
+    className: "my-app-class",
+  },
+  play: async ({ canvas }) => {
+    const hello = canvas.getByText("Hello, world!");
+
+    await expect(hello).toHaveClass("my-app-class");
+    // Hello's own vanilla-extract class is still there...
+    await expect(hello.className).toMatch(/Hello_root__/);
+    // ...so its styles still apply: accent text color, not the inherited default.
+    await expect(getComputedStyle(hello).color).not.toBe(getComputedStyle(document.body).color);
   },
 };

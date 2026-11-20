@@ -8,6 +8,9 @@
 //                  "system" follows the OS before any JavaScript runs
 //   json/*.json   the same tokens as flat { "name": "value" } maps, used by
 //                  the Storybook Foundations pages to list every token
+//   vars.json      every token a component may use, nested by path, with the
+//                  CSS variable name as each value. @jo-ui/ui turns this into
+//                  a typed `vars` object (vars.color.text.accent → var(--...))
 //
 // Run with: pnpm --filter @jo-ui/tokens build
 
@@ -17,6 +20,25 @@ import StyleDictionary from "style-dictionary";
 
 const PRIMITIVES = "src/primitive/*.json";
 const BUILD_PATH = "dist/";
+
+// A custom output format: a nested object following each token's path, with
+// its CSS variable name as the value. Using token.path (not splitting the name
+// on "-") keeps multi-word keys intact: font.line-height.tight stays three
+// levels, not four.
+StyleDictionary.registerFormat({
+  name: "json/css-var-names",
+  format: ({ dictionary }) => {
+    const tree = {};
+    for (const token of dictionary.allTokens) {
+      let node = tree;
+      for (const key of token.path.slice(0, -1)) {
+        node = node[key] ??= {};
+      }
+      node[token.path.at(-1)] = token.name; // e.g. "font-line-height-tight"
+    }
+    return `${JSON.stringify(tree, null, 2)}\n`;
+  },
+});
 
 // Which CSS selector each theme's variables are scoped to.
 // Light also applies to :root, so it's the default when no data-theme is set,
@@ -86,7 +108,31 @@ for (const [theme, selector] of Object.entries(themes)) {
   await sd.buildAllPlatforms();
 }
 
-// 3. system.css: the dark variables again, but only when the OS prefers dark
+// 3. vars.json: the names components may use. Same token set as the CSS files:
+//    semantic colors (the light theme's names; every theme has the same ones)
+//    plus the base tokens, but never raw color primitives.
+//    Written to dist/ rather than dist/json/, which holds only token values
+//    (the contrast check treats every json/ file except base.json as a theme).
+const contract = new StyleDictionary({
+  include: [PRIMITIVES],
+  source: ["src/themes/light.json"],
+  platforms: {
+    css: {
+      transformGroup: "css",
+      buildPath: BUILD_PATH,
+      files: [
+        {
+          destination: "vars.json",
+          format: "json/css-var-names",
+          filter: (token) => token.isSource || token.path[0] !== "color",
+        },
+      ],
+    },
+  },
+});
+await contract.buildAllPlatforms();
+
+// 4. system.css: the dark variables again, but only when the OS prefers dark
 //    and no explicit theme was chosen. Style Dictionary can't wrap output in a
 //    media query, so we copy the variables out of the generated dark.css.
 //    Must be loaded after light.css: both match [data-theme="system"], and the

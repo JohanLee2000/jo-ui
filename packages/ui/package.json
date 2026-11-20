@@ -31,5 +31,10 @@
     "react-dom": "^19.2.0",
     "storybook": "^10.6.7",
     "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "@jo-ui/tokens": "workspace:*",
+    "@vanilla-extract/css": "^1.21.3",
+    "@vanilla-extract/recipes": "^0.5.7"
   }
 }

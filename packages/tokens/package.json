@@ -9,7 +9,8 @@
   },
   "exports": {
     "./css/*": "./dist/css/*",
-    "./json/*": "./dist/json/*"
+    "./json/*": "./dist/json/*",
+    "./vars.json": "./dist/vars.json"
   },
   "devDependencies": {
     "style-dictionary": "^5.8.0"
