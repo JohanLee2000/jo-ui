@@ -48,6 +48,11 @@ const themes = {
   dark: '[data-theme="dark"]',
 };
 
+// Breakpoints can't be CSS variables (var() doesn't work in @media), so
+// they're kept out of the CSS and the vars contract. They're still in
+// base.json, which build-time code (sprinkles) reads to write media queries.
+const isBreakpoint = (token) => token.path[0] === "breakpoint";
+
 // 1. Base tokens: the same in every theme, so they're written once.
 //    Raw color primitives are excluded so components can't reach for
 //    color.blue.600 directly; they must go through a semantic token.
@@ -61,7 +66,7 @@ const base = new StyleDictionary({
         {
           destination: "css/base.css",
           format: "css/variables",
-          filter: (token) => token.path[0] !== "color",
+          filter: (token) => token.path[0] !== "color" && !isBreakpoint(token),
           options: { selector: ":root" },
         },
         {
@@ -124,7 +129,7 @@ const contract = new StyleDictionary({
         {
           destination: "vars.json",
           format: "json/css-var-names",
-          filter: (token) => token.isSource || token.path[0] !== "color",
+          filter: (token) => token.isSource || (token.path[0] !== "color" && !isBreakpoint(token)),
         },
       ],
     },

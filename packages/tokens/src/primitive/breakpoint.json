@@ -1,0 +1,12 @@
+{
+  "breakpoint": {
+    "$type": "dimension",
+    "$description": "Minimum viewport widths for responsive layout. Not output as CSS variables: browsers don't allow var() inside @media queries.",
+
+    "sm":  { "$value": "640px" },
+    "md":  { "$value": "768px" },
+    "lg":  { "$value": "1024px" },
+    "xl":  { "$value": "1280px" },
+    "2xl": { "$value": "1536px" }
+  }
+}
