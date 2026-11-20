@@ -10,6 +10,8 @@ This README is the source of truth for the project: goals, architecture, convent
 ## Notes
 To add more custom colors go to packages/tokens/src/primitive/color.json and can add a range of colors 50-950.
 "Once everything works, you can give jo-ui a signature color. Pick one brand hex value and run it through a scale generator such as uicolors.app, which builds a full 50–950 scale from a single color. Then add it as a new primitive (for example color.brand) and point the semantic accent tokens at it. Because components only use semantic tokens, nothing else has to change."
+
+To run Storybook use "pnpm storybook" inside of apps/docs
 ---
 
 ## Table of Contents

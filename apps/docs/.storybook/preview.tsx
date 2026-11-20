@@ -5,6 +5,7 @@ import type { Decorator, Preview } from "@storybook/react-vite";
 import "@jo-ui/tokens/css/base.css";
 import "@jo-ui/tokens/css/light.css";
 import "@jo-ui/tokens/css/dark.css";
+import "@jo-ui/tokens/css/system.css"; // after light.css: overrides it for "system" when the OS is dark
 import "./preview.css";
 
 // Applies the toolbar's theme choice the same way a real app would:
@@ -25,6 +26,7 @@ const preview: Preview = {
         items: [
           { value: "light", title: "Light", icon: "sun" },
           { value: "dark", title: "Dark", icon: "moon" },
+          { value: "system", title: "System", icon: "browser" },
         ],
         dynamicTitle: true,
       },
