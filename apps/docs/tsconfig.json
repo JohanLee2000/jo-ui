@@ -1,0 +1,7 @@
+{
+  "extends": "@jo-ui/tsconfig/base.json",
+  "compilerOptions": {
+    "types": ["node"]
+  },
+  "include": [".storybook", "vitest.config.ts", "vitest.shims.d.ts"]
+}

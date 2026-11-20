@@ -5,3 +5,5 @@ packages:
   - "packages/*" # publishable libraries (@jo-ui/ui, @jo-ui/tokens, ...)
   - "apps/*" # docs + playgrounds (never published)
   - "tooling/*" # shared configs (tsconfig, eslint, ...)
+allowBuilds:
+  esbuild: true
