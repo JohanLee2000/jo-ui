@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import { Box, Button, Container, Grid, Inline, Stack } from "@jo-ui/ui";
+import { Box, Button, Container, Grid, Heading, Inline, Stack, Text } from "@jo-ui/ui";
 
 const meta = {
   title: "Examples/Responsive Layout",
@@ -36,7 +36,9 @@ export const LandingPage: StoryObj = {
             align={{ base: "flex-start", md: "center" }}
             gap={4}
           >
-            <strong>jo-ui</strong>
+            <Text as="strong" size="lg" weight="bold">
+              jo-ui
+            </Text>
             <Inline as="nav" aria-label="Main" gap={2}>
               <Button variant="ghost" size="sm">
                 Docs
@@ -50,12 +52,12 @@ export const LandingPage: StoryObj = {
 
           {/* Hero */}
           <Stack as="section" aria-labelledby="hero-title" gap={4} align="flex-start">
-            <h1 id="hero-title" style={{ margin: 0, fontSize: "var(--font-size-4xl)", lineHeight: "var(--font-line-height-tight)" }}>
+            <Heading id="hero-title" level={1} size={{ base: "3xl", md: "4xl" }} weight="bold">
               One design system for sites, apps and games
-            </h1>
-            <p style={{ margin: 0, color: "var(--color-text-muted)", maxWidth: "40rem" }}>
-              Every color, gap and breakpoint on this page comes from design tokens.
-            </p>
+            </Heading>
+            <Text size={{ base: "md", md: "lg" }} tone="muted" style={{ maxWidth: "40rem" }}>
+              Every color, gap, font size and breakpoint on this page comes from design tokens.
+            </Text>
             <Inline gap={3}>
               <Button size="lg">Get started</Button>
               <Button size="lg" variant="outline">
@@ -68,10 +70,12 @@ export const LandingPage: StoryObj = {
           <Grid as="ul" aria-label="Features" columns={{ base: 1, sm: 2, lg: 3 }} gap={{ base: 3, md: 4 }} padding={0} style={{ listStyle: "none", margin: 0 }}>
             {features.map(([title, text]) => (
               <Stack as="li" key={title} gap={2} padding={5} background="surface" borderRadius="lg" style={{ border: "1px solid var(--color-border-default)" }}>
-                <strong>{title}</strong>
-                <Box as="p" color="muted" style={{ margin: 0 }}>
+                <Heading level={2} size="md">
+                  {title}
+                </Heading>
+                <Text tone="muted" size="sm">
                   {text}
-                </Box>
+                </Text>
               </Stack>
             ))}
           </Grid>

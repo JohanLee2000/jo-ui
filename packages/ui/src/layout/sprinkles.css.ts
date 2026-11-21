@@ -71,6 +71,8 @@ const responsiveProperties = defineProperties({
     paddingLeft: space,
     paddingRight: space,
     textAlign: ["left", "center", "right"],
+    // Responsive so headings can grow with the screen: size={{ base: "2xl", md: "4xl" }}
+    fontSize: vars.font.size,
   },
   shorthands: {
     padding: ["paddingTop", "paddingBottom", "paddingLeft", "paddingRight"],
@@ -87,6 +89,8 @@ const staticProperties = defineProperties({
     background: vars.color.bg,
     color: vars.color.text,
     borderRadius: vars.radius,
+    fontWeight: vars.font.weight,
+    fontFamily: vars.font.family,
   },
 });
 
