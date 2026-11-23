@@ -7,3 +7,7 @@ dist
 storybook-static
 *.log
 *storybook.log
+
+# Visual regression run output (baselines in __screenshots__ ARE committed)
+test-results
+apps/docs/visual/report

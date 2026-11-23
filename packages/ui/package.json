@@ -35,6 +35,7 @@
   "dependencies": {
     "@jo-ui/tokens": "workspace:*",
     "@jo-ui/ui-core": "workspace:*",
+    "@jo-ui/ui-icons": "workspace:*",
     "@vanilla-extract/css": "^1.21.3",
     "@vanilla-extract/recipes": "^0.5.7",
     "@vanilla-extract/sprinkles": "^1.7.1"

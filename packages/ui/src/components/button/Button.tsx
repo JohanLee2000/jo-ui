@@ -1,8 +1,9 @@
 import { forwardRef, type ComponentPropsWithoutRef, type MouseEvent } from "react";
 
 import { cx, Slot } from "@jo-ui/ui-core";
+import { LoaderIcon } from "@jo-ui/ui-icons";
 
-import { button, type ButtonVariants } from "./Button.css";
+import { button, spinner, type ButtonVariants } from "./Button.css";
 
 export interface ButtonProps extends ComponentPropsWithoutRef<"button">, ButtonVariants {
   /**
@@ -90,6 +91,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       onClick={onClick}
       {...rest}
     >
+      {/* Decorative: aria-busy is what tells screen readers it's working. */}
+      {loading && <LoaderIcon className={spinner} />}
       {children}
     </button>
   );

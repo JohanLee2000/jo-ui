@@ -1,0 +1,36 @@
+{
+  "name": "@jo-ui/ui-icons",
+  "version": "0.0.0",
+  "private": true,
+  "description": "SVG icons as tree-shakeable React components",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JohanLee2000/jo-ui.git",
+    "directory": "packages/ui-icons"
+  },
+  "homepage": "https://github.com/JohanLee2000/jo-ui#readme",
+  "bugs": "https://github.com/JohanLee2000/jo-ui/issues",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "generate": "node scripts/generate.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": "^18.3 || ^19"
+  },
+  "devDependencies": {
+    "@jo-ui/tsconfig": "workspace:*",
+    "@storybook/react-vite": "^10.6.7",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "storybook": "^10.6.7",
+    "typescript": "^7.0.2"
+  }
+}

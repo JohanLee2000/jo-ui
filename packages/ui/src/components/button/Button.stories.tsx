@@ -101,6 +101,10 @@ export const Loading: Story = {
     // Screen readers announce it as busy, and it can't be clicked twice.
     await expect(button).toHaveAttribute("aria-busy", "true");
     await expect(button).toBeDisabled();
+    // A spinning icon shows it visually; it's hidden from screen readers.
+    const spinner = button.querySelector("svg");
+    await expect(spinner).toHaveAttribute("aria-hidden", "true");
+    await expect(getComputedStyle(spinner!).animationIterationCount).toBe("infinite");
     await userEvent.click(button);
     await expect(args.onClick).not.toHaveBeenCalled();
   },

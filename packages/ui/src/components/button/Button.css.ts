@@ -1,6 +1,26 @@
+import { globalStyle, keyframes, style } from "@vanilla-extract/css";
 import { recipe, type RecipeVariants } from "@vanilla-extract/recipes";
 
 import { vars } from "../../theme/vars.css";
+
+// --- Loading spinner -----------------------------------------------------------
+
+const spin = keyframes({ to: { transform: "rotate(360deg)" } });
+
+export const spinner = style({
+  flexShrink: 0,
+  animationName: spin,
+  animationDuration: `calc(${vars.motion.duration.slower} * 2)`, // one turn per second
+  animationTimingFunction: "linear",
+  animationIterationCount: "infinite",
+  "@media": {
+    // Still spins (it's how the user knows something is happening), just slower.
+    "(prefers-reduced-motion: reduce)": {
+      animationDuration: `calc(${vars.motion.duration.slower} * 6)`,
+    },
+  },
+});
+
 
 export const button = recipe({
   // Styles every button gets, whatever its props.
@@ -144,6 +164,24 @@ export const button = recipe({
     variant: "solid",
     tone: "accent",
   },
+});
+
+// --- IconButton ----------------------------------------------------------------
+// Must come AFTER the recipe: vanilla-extract outputs CSS in file order, and
+// this overrides the size variants' paddingInline with the same specificity,
+// so the later rule wins. Defined earlier, md's 16px padding would win and
+// the "square" button would be 54px wide.
+
+/** Square: same width as height, so sm/md/lg are 32/40/48px squares. */
+export const iconOnly = style({
+  paddingInline: 0,
+  aspectRatio: "1 / 1",
+});
+
+// Icons default to 1em; a bit larger reads better when it's the only content.
+globalStyle(`${iconOnly} > svg`, {
+  width: "1.25em",
+  height: "1.25em",
 });
 
 /** { size?: "sm" | "md" | "lg"; variant?: ...; tone?: ... }, derived from the recipe above. */

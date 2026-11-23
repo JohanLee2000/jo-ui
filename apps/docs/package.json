@@ -7,6 +7,8 @@
     "storybook": "pnpm build-tokens && storybook dev -p 6006",
     "build-storybook": "pnpm build-tokens && storybook build",
     "test": "pnpm build-tokens && vitest run",
+    "test:visual": "pnpm build-storybook && playwright test -c visual",
+    "test:visual:update": "pnpm build-storybook && playwright test -c visual --update-snapshots",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -17,6 +19,7 @@
   },
   "devDependencies": {
     "@jo-ui/tsconfig": "workspace:*",
+    "@playwright/test": "1.65.1",
     "@storybook/addon-a11y": "^10.6.7",
     "@storybook/addon-docs": "^10.6.7",
     "@storybook/addon-vitest": "^10.6.7",
