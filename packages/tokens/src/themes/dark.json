@@ -13,7 +13,8 @@
       "danger-hover":   { "$value": "{color.red.700}" },
       "danger-subtle":  { "$value": "{color.red.950}" },
       "success-subtle": { "$value": "{color.green.950}" },
-      "warning-subtle": { "$value": "{color.amber.950}" }
+      "warning-subtle": { "$value": "{color.amber.950}" },
+      "overlay":        { "$value": "#000000a6", "$description": "Dims the page behind modal dialogs (black at 65%: stronger, since the page is already dark)." }
     },
 
     "text": {

@@ -1,0 +1,16 @@
+{
+  "shadow": {
+    "$type": "shadow",
+    "$description": "Elevation. Larger shadows read as further above the page.",
+
+    "sm": {
+      "$value": { "color": "#0000001a", "offsetX": "0px", "offsetY": "1px", "blur": "3px", "spread": "0px" }
+    },
+    "md": {
+      "$value": { "color": "#0000001f", "offsetX": "0px", "offsetY": "6px", "blur": "16px", "spread": "-2px" }
+    },
+    "lg": {
+      "$value": { "color": "#00000033", "offsetX": "0px", "offsetY": "20px", "blur": "48px", "spread": "-8px" }
+    }
+  }
+}
