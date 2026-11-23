@@ -8,6 +8,7 @@ export { mergeRefs, setRef, useMergedRefs } from "./utils/mergeRefs";
 // Hooks
 export { useControllableState } from "./hooks/useControllableState";
 export type { UseControllableStateOptions } from "./hooks/useControllableState";
+export { useScrollLock } from "./hooks/useScrollLock";
 
 // Primitives
 export { Slot } from "./primitives/Slot";

@@ -14,3 +14,4 @@ export * from "./components/textarea";
 export * from "./components/checkbox";
 export * from "./components/switch";
 export * from "./components/radio-group";
+export * from "./components/dialog";
