@@ -36,13 +36,16 @@ export default defineConfig({
       // between operating systems, which is why baselines are stored per
       // platform (__screenshots__/win32/). CI on Linux will need its own set.
       maxDiffPixels: 0,
-      // Per-pixel color tolerance (default 0.2). Zero, so subtle color shifts count.
+      // Per-pixel color tolerance (0–1, default 0.2). 0.03 absorbs GPU
+      // anti-aliasing noise (measured: up to 7/255 per channel on the edge of
+      // a round focus ring between identical runs) while real changes, which
+      // move whole pixels, still fail.
       // Known limit: the comparison deliberately ignores anti-aliased pixels
       // (to avoid flaky tests), so a tiny change that only touches edges, like
       // a 2px corner radius on one small button, can pass on its own. In a
       // real run the same change still fails every story that shows it
       // larger or in another state (tested: 54 of 132 failed).
-      threshold: 0,
+      threshold: 0.03,
     },
   },
 
